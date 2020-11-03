@@ -14,31 +14,11 @@
     limitations under the License.
 */
 
-#include "ch.h"
 #include "hal.h"
+#include "osal.h"
 // #include "rt_test_root.h"
 // #include "oslib_test_root.h"
 #include "chprintf.h"
-
-/*
- * Green LED blinker thread, times are in milliseconds.
- */
-static THD_WORKING_AREA(waThread1, 128);
-static THD_FUNCTION(Thread1, arg) {
-
-  (void)arg;
-  chRegSetThreadName("blinker");
-  static uint8_t counter = 0;
-  while (true) {
-    palClearPad(GPIOC, GPIOC_LED_BLUE);
-    chThdSleepMilliseconds(500);
-    palSetPad(GPIOC, GPIOC_LED_BLUE);
-    chThdSleepMilliseconds(500);
-    // sdWrite(&SD2, (uint8_t*)"Hello\r\n", 7);
-    chprintf((BaseSequentialStream*)&SD2, "hello %d\r\n", counter);
-    counter++;
-  }
-}
 
 static SerialConfig usart2_config = {
   115200,
@@ -60,27 +40,22 @@ int main(void) {
    *   RTOS is active.
    */
   halInit();
-  chSysInit();
+  osalInit();
+  osalSysEnable();
 
   /*
    * Activates the serial driver 2 using the driver default configuration.
    */
   sdStart(&SD2, &usart2_config);
 
-  /*
-   * Creates the blinker thread.
-   */
-  chThdCreateStatic(waThread1, sizeof(waThread1), NORMALPRIO + 1, Thread1, NULL);
-
-  /*
-   * Normal main() thread activity, in this demo it does nothing except
-   * sleeping in a loop and check the button state.
-   */
+  static uint8_t counter = 0;
   while (true) {
-    // if (!palReadPad(GPIOC, GPIOC_BUTTON)) {
-    //   test_execute((BaseSequentialStream *)&SD2, &rt_test_suite);
-    //   test_execute((BaseSequentialStream *)&SD2, &oslib_test_suite);
-    // }
-    chThdSleepMilliseconds(500);
-  }
+    palClearPad(GPIOC, GPIOC_LED_BLUE);
+    osalThreadSleepMilliseconds(500);
+    palSetPad(GPIOC, GPIOC_LED_BLUE);
+    osalThreadSleepMilliseconds(500);
+    // sdWrite(&SD2, (uint8_t*)"Hello\r\n", 7);
+    chprintf((BaseSequentialStream*)&SD2, "hello %d, tick=%d\r\n", counter, osalOsGetSystemTimeX() );
+    counter++;
+  }  
 }
