@@ -18,6 +18,7 @@
 #include "hal.h"
 // #include "rt_test_root.h"
 // #include "oslib_test_root.h"
+#include "chprintf.h"
 
 /*
  * Green LED blinker thread, times are in milliseconds.
@@ -27,13 +28,24 @@ static THD_FUNCTION(Thread1, arg) {
 
   (void)arg;
   chRegSetThreadName("blinker");
+  static uint8_t counter = 0;
   while (true) {
     palClearPad(GPIOC, GPIOC_LED_BLUE);
     chThdSleepMilliseconds(500);
     palSetPad(GPIOC, GPIOC_LED_BLUE);
     chThdSleepMilliseconds(500);
+    // sdWrite(&SD2, (uint8_t*)"Hello\r\n", 7);
+    chprintf((BaseSequentialStream*)&SD2, "hello %d\r\n", counter);
+    counter++;
   }
 }
+
+static SerialConfig usart2_config = {
+  115200,
+  0,
+  0,
+  0
+};
 
 /*
  * Application entry point.
@@ -53,7 +65,7 @@ int main(void) {
   /*
    * Activates the serial driver 2 using the driver default configuration.
    */
-  sdStart(&SD2, NULL);
+  sdStart(&SD2, &usart2_config);
 
   /*
    * Creates the blinker thread.
