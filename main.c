@@ -16,8 +16,8 @@
 
 #include "ch.h"
 #include "hal.h"
-#include "rt_test_root.h"
-#include "oslib_test_root.h"
+// #include "rt_test_root.h"
+// #include "oslib_test_root.h"
 
 /*
  * Green LED blinker thread, times are in milliseconds.
@@ -28,9 +28,9 @@ static THD_FUNCTION(Thread1, arg) {
   (void)arg;
   chRegSetThreadName("blinker");
   while (true) {
-    palClearPad(GPIOA, GPIOA_LED_GREEN);
+    palClearPad(GPIOC, GPIOC_LED_BLUE);
     chThdSleepMilliseconds(500);
-    palSetPad(GPIOA, GPIOA_LED_GREEN);
+    palSetPad(GPIOC, GPIOC_LED_BLUE);
     chThdSleepMilliseconds(500);
   }
 }
@@ -65,10 +65,10 @@ int main(void) {
    * sleeping in a loop and check the button state.
    */
   while (true) {
-    if (!palReadPad(GPIOC, GPIOC_BUTTON)) {
-      test_execute((BaseSequentialStream *)&SD2, &rt_test_suite);
-      test_execute((BaseSequentialStream *)&SD2, &oslib_test_suite);
-    }
+    // if (!palReadPad(GPIOC, GPIOC_BUTTON)) {
+    //   test_execute((BaseSequentialStream *)&SD2, &rt_test_suite);
+    //   test_execute((BaseSequentialStream *)&SD2, &oslib_test_suite);
+    // }
     chThdSleepMilliseconds(500);
   }
 }
