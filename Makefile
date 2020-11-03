@@ -185,7 +185,7 @@ include $(RULESPATH)/rules.mk
 # Custom rules
 #
 
-flash:
+flash: all
 	st-flash --reset write $(BUILDDIR)/$(PROJECT).bin 0x8000000
 
 #
