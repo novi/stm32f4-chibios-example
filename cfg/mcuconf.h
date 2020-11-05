@@ -39,17 +39,17 @@
 #define STM32_NO_INIT                       FALSE
 #define STM32_HSI_ENABLED                   TRUE
 #define STM32_LSI_ENABLED                   TRUE
-#define STM32_HSE_ENABLED                   FALSE
+#define STM32_HSE_ENABLED                   TRUE
 #define STM32_LSE_ENABLED                   FALSE
 #define STM32_CLOCK48_REQUIRED              TRUE
-#define STM32_SW                            STM32_SW_PLL
-#define STM32_PLLSRC                        STM32_PLLSRC_HSI
-#define STM32_PLLM_VALUE                    16
-#define STM32_PLLN_VALUE                    336     
+#define STM32_SW                            STM32_SW_HSE
+#define STM32_PLLSRC                        STM32_PLLSRC_HSE
+#define STM32_PLLM_VALUE                    15
+#define STM32_PLLN_VALUE                    144     
 #define STM32_PLLP_VALUE                    4       
-#define STM32_PLLQ_VALUE                    7       
+#define STM32_PLLQ_VALUE                    5       
 #define STM32_HPRE                          STM32_HPRE_DIV1  
-#define STM32_PPRE1                         STM32_PPRE1_DIV2  
+#define STM32_PPRE1                         STM32_PPRE1_DIV1  
 #define STM32_PPRE2                         STM32_PPRE2_DIV1 
 #define STM32_RTCSEL                        STM32_RTCSEL_LSI
 #define STM32_RTCPRE_VALUE                  8
@@ -63,6 +63,15 @@
 #define STM32_PVD_ENABLE                    FALSE
 #define STM32_PLS                           STM32_PLS_LEV0
 #define STM32_BKPRAM_ENABLE                 FALSE
+
+
+// #define STM32_SW                            STM32_SW_PLL
+// #define STM32_PLLSRC                        STM32_PLLSRC_HSI
+// #define STM32_PLLM_VALUE                    16
+// #define STM32_PLLN_VALUE                    336    
+// #define STM32_PLLQ_VALUE                    7       
+// #define STM32_HPRE                          STM32_HPRE_DIV1  
+// #define STM32_PPRE1                         STM32_PPRE1_DIV2 
 
 /*
  * IRQ system settings.
@@ -238,16 +247,19 @@
 /*
  * USB driver system settings.
  */
-#define STM32_USB_USE_OTG1                  FALSE
+#define STM32_USB_USE_OTG1                  TRUE
 #define STM32_USB_OTG1_IRQ_PRIORITY         14
 #define STM32_USB_OTG1_RX_FIFO_SIZE         512
 #define STM32_USB_OTG_THREAD_PRIO           LOWPRIO
 #define STM32_USB_OTG_THREAD_STACK_SIZE     128
 #define STM32_USB_OTGFIFO_FILL_BASEPRI      0
+#define STM32_USB_HOST_WAKEUP_DURATION      2 // need ?
 
 /*
  * WDG driver system settings.
  */
 #define STM32_WDG_USE_IWDG                  FALSE
+
+#include "mcuconf_community.h"
 
 #endif /* MCUCONF_H */
