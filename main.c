@@ -113,13 +113,6 @@ static THD_FUNCTION(Thread1, arg) {
   }
 }
 
-static SerialConfig usart2_config = {
-  115200,
-  0,
-  0,
-  0
-};
-
 #if USBH_DEBUG_MULTI_HOST
 void USBH_DEBUG_OUTPUT_CALLBACK(USBHDriver *host, const uint8_t *buff, size_t len) {
 	(void)host;
@@ -152,7 +145,7 @@ int main(void) {
   /*
    * Activates the serial driver 2 using the driver default configuration.
    */
-  sdStart(&SD2, &usart2_config);
+  sdStart(&SD2, NULL);
   sdWrite(&SD2, (const uint8_t *)"start\r\n", 7);
   chThdSleepMilliseconds(100);
 
