@@ -147,7 +147,7 @@
  * @brief   Enables search ROM feature.
  * @note    Disabling this option saves both code and data space.
  */
-#define ONEWIRE_USE_SEARCH_ROM      TRUE
+#define ONEWIRE_USE_SEARCH_ROM      FALSE
 
 /*===========================================================================*/
 /* QEI driver related settings.                                              */

@@ -165,8 +165,8 @@ int main(void) {
   /*
    * Creates the blinker thread.
    */
-  chThdCreateStatic(waThread1, sizeof(waThread1), NORMALPRIO + 1, Thread1, NULL);
-    
+  chThdCreateStatic(waThread1, sizeof(waThread1), NORMALPRIO, Thread1, NULL);
+
   //start
 #if STM32_USBH_USE_OTG1
     usbhStart(&USBHD1);
@@ -178,6 +178,7 @@ int main(void) {
 #endif
 
     for(;;) {
+        // sdWrite(&SD2, (const uint8_t *)"loop\r\n", 6);
 #if STM32_USBH_USE_OTG1
         usbhMainLoop(&USBHD1);
 #endif
@@ -187,5 +188,6 @@ int main(void) {
         chThdSleepMilliseconds(100);
 
         // IWDG->KR = 0xAAAA;
+        
     }
 }

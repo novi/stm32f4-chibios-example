@@ -49,6 +49,7 @@
 #endif
 
 // #define STM32_HSE_BYPASS
+#define BOARD_OTG_NOVBUSSENS
 
 /*
  * Board voltages.
@@ -59,7 +60,7 @@
 /*
  * MCU type as defined in the ST header.
  */
-#define STM32F401xE
+#define STM32F401xC
 
 /*
  * IO pins assignments.
