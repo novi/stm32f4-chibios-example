@@ -30,19 +30,21 @@ static void _hid_report_callback(USBHHIDDriver *hidp, uint16_t len) {
     uint8_t *report = (uint8_t *)hidp->config->report_buffer;
 
     if (hidp->type == USBHHID_DEVTYPE_BOOT_MOUSE) {
-        _usbh_dbgf(hidp->dev->host, "Mouse report: buttons=%02x, Dx=%d, Dy=%d",
+        _usbh_dbgf(hidp->dev->host, "Mouse report: buttons=%02x, Dx=%d, Dy=%d from device %x",
                 report[0],
                 (int8_t)report[1],
-                (int8_t)report[2]);
+                (int8_t)report[2],
+                hidp->dev);
     } else if (hidp->type == USBHHID_DEVTYPE_BOOT_KEYBOARD) {
-        _usbh_dbgf(hidp->dev->host, "Keyboard report: modifier=%02x, keys=%02x %02x %02x %02x %02x %02x",
+        _usbh_dbgf(hidp->dev->host, "Keyboard report: modifier=%02x, keys=%02x %02x %02x %02x %02x %02x from device %x",
                 report[0],
                 report[2],
                 report[3],
                 report[4],
                 report[5],
                 report[6],
-                report[7]);
+                report[7],
+                hidp->dev);
     } else {
         _usbh_dbgf(hidp->dev->host, "Generic report, %d bytes", len);
     }

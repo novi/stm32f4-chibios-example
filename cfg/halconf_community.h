@@ -236,7 +236,7 @@
 
 /* HID */
 #define HAL_USBH_USE_HID                              TRUE
-#define HAL_USBHHID_MAX_INSTANCES                     2
+#define HAL_USBHHID_MAX_INSTANCES                     3
 #define HAL_USBHHID_USE_INTERRUPT_OUT                 FALSE
 
 /* HUB */
@@ -254,17 +254,17 @@
 #define USBH_DEBUG_BUFFER                             25000
 #define USBH_DEBUG_OUTPUT_CALLBACK                    usbh_debug_output
 
-#define USBH_DEBUG_ENABLE_TRACE                       TRUE
+#define USBH_DEBUG_ENABLE_TRACE                       FALSE
 #define USBH_DEBUG_ENABLE_INFO                        TRUE
 #define USBH_DEBUG_ENABLE_WARNINGS                    TRUE
 #define USBH_DEBUG_ENABLE_ERRORS                      TRUE
 
-#define USBH_LLD_DEBUG_ENABLE_TRACE                   TRUE
+#define USBH_LLD_DEBUG_ENABLE_TRACE                   FALSE
 #define USBH_LLD_DEBUG_ENABLE_INFO                    TRUE
 #define USBH_LLD_DEBUG_ENABLE_WARNINGS                TRUE
 #define USBH_LLD_DEBUG_ENABLE_ERRORS                  TRUE
 
-#define USBHHUB_DEBUG_ENABLE_TRACE                    TRUE
+#define USBHHUB_DEBUG_ENABLE_TRACE                    FALSE
 #define USBHHUB_DEBUG_ENABLE_INFO                     TRUE
 #define USBHHUB_DEBUG_ENABLE_WARNINGS                 TRUE
 #define USBHHUB_DEBUG_ENABLE_ERRORS                   TRUE
