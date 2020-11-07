@@ -104,9 +104,9 @@ static THD_FUNCTION(Thread1, arg) {
   static uint8_t counter = 0;
   while (true) {
     palClearPad(GPIOC, GPIOC_LED_BLUE);
-    chThdSleepMilliseconds(500);
+    osalThreadSleepMilliseconds(500);
     palSetPad(GPIOC, GPIOC_LED_BLUE);
-    chThdSleepMilliseconds(500);
+    osalThreadSleepMilliseconds(500);
     // sdWrite(&SD2, (uint8_t*)"Hello\r\n", 7);
     chprintf((BaseSequentialStream*)&SD2, "hello %d, tick=%d\r\n", counter, osalOsGetSystemTimeX() );
     counter++;
@@ -147,7 +147,7 @@ int main(void) {
    */
   sdStart(&SD2, NULL);
   sdWrite(&SD2, (const uint8_t *)"start\r\n", 7);
-  chThdSleepMilliseconds(100);
+  osalThreadSleepMilliseconds(100);
 
   #if STM32_USBH_USE_OTG1
     //VBUS - configured in board.h
@@ -185,7 +185,7 @@ int main(void) {
 #if STM32_USBH_USE_OTG2
         usbhMainLoop(&USBHD2);
 #endif
-        chThdSleepMilliseconds(100);
+        osalThreadSleepMilliseconds(100);
 
         // IWDG->KR = 0xAAAA;
         

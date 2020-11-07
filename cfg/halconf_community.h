@@ -131,7 +131,7 @@
  * @note    Disabling this option saves both code and data space.
  */
 #if !defined(NAND_USE_MUTUAL_EXCLUSION) || defined(__DOXYGEN__)
-#define NAND_USE_MUTUAL_EXCLUSION   TRUE
+#define NAND_USE_MUTUAL_EXCLUSION   FALSE
 #endif
 
 /*===========================================================================*/
